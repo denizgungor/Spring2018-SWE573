@@ -4,5 +4,7 @@ This repository contains applications &amp; documentation developed for BoÄŸaziÃ
 Project Plan
 
 Tomsplanner has been used for project plan.
-Please find it in here: https://www.tomsplanner.com/public/denizswe573
+Please find it in here: 
+
+https://www.tomsplanner.com/public/denizswe573
 
