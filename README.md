@@ -8,7 +8,7 @@ Please find it in here:
 
 https://www.tomsplanner.com/public/denizswe573   
 
-# Installing Instructions    
+## Installing Instructions    
 
 ```
 git clone https://github.com/denizgungor/Spring2018-SWE573.git  
