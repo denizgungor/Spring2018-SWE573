@@ -11,6 +11,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from bs4 import BeautifulSoup
 from textblob import TextBlob
 import operator
+import preprocessor as p
 
 consumer_key = 'bT3x6y2rZCI6h6PQlaAOeQlAu'
 consumer_secret = 'MpcpsCdVfixFSbbQnnHvr5fxgZmx2Dx2fQCwzppfPDOMvbphZh'
@@ -35,7 +36,8 @@ def test(request, string):
 	jsonObject = json.dumps([status._json for status in requestData])
 	results = json.loads(jsonObject)
 	for tweet in results:
-		tweetData = tweet['text']
+		p.set_options(p.OPT.URL, p.OPT.MENTION, p.OPT.RESERVED)
+		tweetData = p.clean(tweet['text'])
 		print(tweetData)
 		sid = SentimentIntensityAnalyzer()
 		ss = sid.polarity_scores(tweetData)
@@ -51,7 +53,7 @@ def test(request, string):
 		result_sentiment = max(ss.items(), key=operator.itemgetter(1))[0]
 		sentimentDataSet.append(result_sentiment)
 
-	return render(request, 'analyze/test.html', {'data': resultDataSet, 'sentiments': sentimentDataSet, 'string':string})
+	return render(request, 'analyze/test.html', {'data': resultDataSet, 'sentiments': sentimentDataSet, 'string':string, 'scoreList': ss.items()})
 
 def logout(request):
     return render(request, 'analyze/logout.html', {})

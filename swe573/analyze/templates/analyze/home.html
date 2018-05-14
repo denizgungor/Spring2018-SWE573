@@ -15,5 +15,17 @@
   <a href="test/rape/">Test rape keywords</a> </br>
   <a href="test/beautiful/">Test beautiful keywords</a> </br>
 
+  <form method="post" action="/getdata/">
+    <table>
+        <tr>
+            <td>Enter search term:</td>
+            <td><input type="text" id="searchString"/></td>
+            <td><input type="button" onclick="location.href='/test/'+document.getElementById('searchString').value+'/';" value="click to analyze your term" /></td>
+        </tr>
+        
+    </table>
+</form>
+
+
 
 {% endblock %}
