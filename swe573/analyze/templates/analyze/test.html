@@ -1,0 +1,27 @@
+
+<html>
+    <head>
+        <title>Deniz</title>
+    </head>
+    <body>
+    <a href="{% url 'home' %}">Go Back!</a>
+    <h1>Tweets for  {{string}}:</h1>
+    {% for tweet in data %}
+      <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span> {{tweet.text }}</p>
+    {% endfor %}
+
+	{% for sentiment in sentiments %}
+		{% if sentiment == 'neu' %}
+	      <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>Neutral---{{sentiment}}</p>
+	    {% elif sentiment == 'pos' %}
+	      <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>Positive---{{sentiment}}</p>
+		{% elif sentiment == 'neg' %}
+	      <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>Negative--{{sentiment}}</p>
+        {% else %}
+          <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>{{sentiment}}</p>
+          
+	    {% endif %}      
+    {% endfor %}
+
+    </body>
+</html>
