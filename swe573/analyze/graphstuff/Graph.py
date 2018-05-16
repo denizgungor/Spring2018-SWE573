@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from swe573 import settings
 
 class Graph(object):
     def __init__(self, analyse_results):
@@ -70,7 +71,8 @@ class Graph(object):
         plt.bar(range(len(neg)), neg, align="center", color='coral')
         plt.bar(range(len(neg)), neu, bottom=stacked_neu, align="center", color='khaki')
         plt.bar(range(len(neg)), pos, bottom=stacked_pos, align="center", color='forestgreen')
-        fig.savefig('denizgraph.png', dpi=fig.dpi)
+        # fig.savefig('denizgraph.png', dpi=fig.dpi)
+        fig.savefig(settings.BASE_DIR + settings.STATIC_URL + 'deniz_graph.png')
 
 
         # plt.bar(range(len(neg)), neg, align="center")
