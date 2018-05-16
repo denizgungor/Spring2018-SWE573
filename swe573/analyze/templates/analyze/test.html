@@ -1,7 +1,7 @@
 
 <html>
     <head>
-        <title>Deniz</title>
+        <title>Tweets and Sentiment Analysis</title>
     </head>
     <body>
     <a href="{% url 'home' %}">Go Back!</a>
@@ -9,6 +9,8 @@
     {% for tweet in data %}
       <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span> {{tweet.text }}</p>
     {% endfor %}
+
+    <h1>Sentiment Analysis for  {{string}}:</h1>
 
 	{% for sentiment in sentiments %}
 		{% if sentiment == 'neu' %}

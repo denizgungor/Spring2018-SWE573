@@ -25,7 +25,7 @@ def home(request):
 
 @login_required
 def test(request, string):
-	resultDataSet = []
+	resultDataSet = list()
 	sentimentDataSet = []
 	sentimentValueDataSet = []
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -38,9 +38,9 @@ def test(request, string):
 	for tweet in results:
 		p.set_options(p.OPT.URL, p.OPT.MENTION, p.OPT.RESERVED)
 		tweetData = p.clean(tweet['text'])
-		print(tweetData)
-		sid = SentimentIntensityAnalyzer()
-		ss = sid.polarity_scores(tweetData)
+		#print(tweetData)
+		#sid = SentimentIntensityAnalyzer()
+		#ss = sid.polarity_scores(tweetData)
 		#text = str([text.encode('utf-8') for text in tweet])
 		#sid = SentimentIntensityAnalyzer()
 		#ss = sid.polarity_scores("a")
@@ -50,9 +50,10 @@ def test(request, string):
 	for i in resultDataSet:
 		sid = SentimentIntensityAnalyzer()
 		ss = sid.polarity_scores(i['text'])
-		result_sentiment = max(ss.items(), key=operator.itemgetter(1))[0]
+		#result_sentiment = max(ss.items(), key=operator.itemgetter(1))[0]
+		result_sentiment = ss.items()
 		sentimentDataSet.append(result_sentiment)
-
+    
 	return render(request, 'analyze/test.html', {'data': resultDataSet, 'sentiments': sentimentDataSet, 'string':string, 'scoreList': ss.items()})
 
 def logout(request):
