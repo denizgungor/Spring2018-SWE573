@@ -16,6 +16,7 @@
   <a href="test/beautiful/">Test beautiful keywords</a> </br>
 
   <form method="post" action="/getdata/">
+      {% csrf_token %} 
     <table>
         <tr>
             <td>Enter the keyword:</td>
