@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 import json
 import tweepy
 from tweepy import cursor
@@ -13,6 +13,8 @@ from textblob import TextBlob
 import operator
 import preprocessor as p
 from analyze.graphstuff.Graph import Graph
+from swe573 import settings
+from django.http import HttpResponse
 
 consumer_key = 'bT3x6y2rZCI6h6PQlaAOeQlAu'
 consumer_secret = 'MpcpsCdVfixFSbbQnnHvr5fxgZmx2Dx2fQCwzppfPDOMvbphZh'
@@ -20,9 +22,9 @@ access_token = '995715271208919040-kJlqUCQuV14dSpflm6BqRxFOlwBT987'
 access_token_secret = 'o6CQaDFtiVRgCuTWNCwc4qLfSOvkAJfXM4RCL0g7KzeWV'
 var1 = "data123"
 
-# global variables
-global_sentiment_analysis = ""
+# global actions
 nltk.download('vader_lexicon')
+
 
 # Create your views here.
 @login_required
@@ -61,16 +63,26 @@ def test(request, string):
         result_sentiment = ss.items()
         sentimentDataSet.append(result_sentiment)
 
-    global_sentiment_analysis = get_sentiment_graph(sentimentDataSet)
-    return render(request, 'analyze/test.html',
-                  {'data': resultDataSet, 'sentiments': sentimentDataSet, 'string': string, 'scoreList': ss.items()})
+    generate_sentiment_graph(sentimentDataSet)
+    print(settings.BASE_DIR + settings.STATIC_URL + 'deniz_graph.png')
+
+    args = {'data': resultDataSet, 'sentiments': sentimentDataSet, 'string': string, 'scoreList': ss.items(),
+            'sentiment_graph': reverse(show_sentiment_graph)}
+
+    return render(request, 'analyze/test.html', args)
 
 
-def get_sentiment_graph(data_set):
+def generate_sentiment_graph(data_set):
     result = Graph(data_set).draw_graph()
     print("--------------------------------Denizdenizdeniz------------------------")
     print(result)
     return result
+
+
+def show_sentiment_graph():
+    my_graph = open(settings.BASE_DIR + settings.STATIC_URL + 'deniz_graph.png', "rb").read()
+    print(settings.BASE_DIR + settings.STATIC_URL + 'deniz_graph.png')
+    return HttpResponse(my_graph, content_type="image/png")
 
 
 def logout(request):

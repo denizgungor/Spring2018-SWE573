@@ -1,29 +1,35 @@
-
 <html>
-    <head>
-        <title>Tweets and Sentiment Analysis</title>
-    </head>
-    <body>
-    <a href="{% url 'home' %}">Go Back!</a>
-    <h1>Tweets for  {{string}}:</h1>
-    {% for tweet in data %}
-      <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span> {{tweet.text }}</p>
-    {% endfor %}
+<head>
+    <title>Tweets and Sentiment Analysis</title>
+    {% load staticfiles %}
+</head>
+<body>
+<a href="{% url 'home' %}">Go Back!</a>
+<h1>Tweets for {{string}}:</h1>
+{% for tweet in data %}
+<p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span> {{tweet.text }}</p>
+{% endfor %}
 
-    <h1>Sentiment Analysis for  {{string}}:</h1>
+<h1>Sentiment Analysis for {{string}}:</h1>
 
-	{% for sentiment in sentiments %}
-		{% if sentiment == 'neu' %}
-	      <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>Neutral---{{sentiment}}</p>
-	    {% elif sentiment == 'pos' %}
-	      <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>Positive---{{sentiment}}</p>
-		{% elif sentiment == 'neg' %}
-	      <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>Negative--{{sentiment}}</p>
-        {% else %}
-          <p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>{{sentiment}}</p>
-          
-	    {% endif %}      
-    {% endfor %}
+{% for sentiment in sentiments %}
+{% if sentiment == 'neu' %}
+<p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>Neutral---{{sentiment}}</p>
+{% elif sentiment == 'pos' %}
+<p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>Positive---{{sentiment}}</p>
+{% elif sentiment == 'neg' %}
+<p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>Negative--{{sentiment}}</p>
+{% else %}
+<p><span style="color:red;font-weight:bold;">{{forloop.counter}} )</span>{{sentiment}}</p>
 
-    </body>
+{% endif %}
+{% endfor %}
+<div class="col-md-120">
+    {% load static %}
+
+    {% if sentiment_graph != None %}
+    <img src="{{sentiment_graph}}" width="600" height="450" title="Sentiment Analysis Graph">
+    {% endif %}
+</div>
+</body>
 </html>
