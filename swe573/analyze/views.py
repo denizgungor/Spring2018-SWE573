@@ -43,10 +43,9 @@ def test(request, string):
     requestData = api.search(q=searchquery, count=15, lang='en')
     jsonObject = json.dumps([status._json for status in requestData])
     results = json.loads(jsonObject)
-    import preprocessor
     for tweet in results:
-        preprocessor.set_options(preprocessor.OPT.URL, preprocessor.OPT.MENTION, preprocessor.OPT.RESERVED)
-        tweetData = preprocessor.clean(tweet['text'])
+        # preprocessor.set_options(preprocessor.OPT.URL, preprocessor.OPT.MENTION, preprocessor.OPT.RESERVED)
+        # tweetData = preprocessor.clean(tweet['text'])
         # print(tweetData)
         # sid = SentimentIntensityAnalyzer()
         # ss = sid.polarity_scores(tweetData)
