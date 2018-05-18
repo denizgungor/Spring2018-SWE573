@@ -70,9 +70,9 @@ class Graph(object):
         stacked_neu = neg
         stacked_pos = neg + neu
 
-        plt.bar(range(len(neg)), neg, align="center", color='coral')
-        plt.bar(range(len(neg)), neu, bottom=stacked_neu, align="center", color='khaki')
-        plt.bar(range(len(neg)), pos, bottom=stacked_pos, align="center", color='forestgreen')
+        plt.bar(range(len(neg + 1), 1), neg, align="center", color='coral')
+        plt.bar(range(len(neg + 1), 1), neu, bottom=stacked_neu, align="center", color='khaki')
+        plt.bar(range(len(neg + 1), 1), pos, bottom=stacked_pos, align="center", color='forestgreen')
         # fig.savefig('denizgraph.png', dpi=fig.dpi)
         fig.savefig(settings.BASE_DIR + settings.STATIC_URL + 'deniz_graph.png')
 
