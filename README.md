@@ -17,3 +17,9 @@ pip install -r requirements.txt
 cd swe573
 python manage.py runserver
 ```   
+
+If you see  "RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly."    
+Please run the command below:    
+```conda install matplotlib```    
+and run again:    
+```python manage.py runserver```    
