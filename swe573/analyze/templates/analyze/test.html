@@ -28,7 +28,8 @@
     {% load static %}
 
     {% if sentiment_graph != None %}
-    <img src="{{sentiment_graph}}" width="600" height="450" title="Sentiment Analysis Graph">
+    <!--<img src="{{sentiment_graph}}" width="600" height="450" title="Sentiment Analysis Graph">-->
+    <img src="{% static 'deniz_graph.png' %}" width="600" height="450" title="Sentiment Analysis Graph">
     {% endif %}
 </div>
 </body>

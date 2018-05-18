@@ -42,7 +42,7 @@ class Graph(object):
         #
         fig = plt.figure()
         plt.title('Sentiment Analysis')
-        plt.xlabel('tweet sayisi burasi sanirim guzel bir isim vermek lazim')
+        plt.xlabel('Number of Tweets')
         plt.ylabel('Values')
         print(type(neg))
         print(neg)

@@ -11,7 +11,6 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from bs4 import BeautifulSoup
 from textblob import TextBlob
 import operator
-import preprocessor as p
 from analyze.graphstuff.Graph import Graph
 from swe573 import settings
 from django.http import HttpResponse
@@ -44,9 +43,10 @@ def test(request, string):
     requestData = api.search(q=searchquery, count=15, lang='en')
     jsonObject = json.dumps([status._json for status in requestData])
     results = json.loads(jsonObject)
+    import preprocessor
     for tweet in results:
-        p.set_options(p.OPT.URL, p.OPT.MENTION, p.OPT.RESERVED)
-        tweetData = p.clean(tweet['text'])
+        preprocessor.set_options(preprocessor.OPT.URL, preprocessor.OPT.MENTION, preprocessor.OPT.RESERVED)
+        tweetData = preprocessor.clean(tweet['text'])
         # print(tweetData)
         # sid = SentimentIntensityAnalyzer()
         # ss = sid.polarity_scores(tweetData)
@@ -79,7 +79,7 @@ def generate_sentiment_graph(data_set):
     return result
 
 
-def show_sentiment_graph():
+def show_sentiment_graph(request):
     my_graph = open(settings.BASE_DIR + settings.STATIC_URL + 'deniz_graph.png', "rb").read()
     print(settings.BASE_DIR + settings.STATIC_URL + 'deniz_graph.png')
     return HttpResponse(my_graph, content_type="image/png")
