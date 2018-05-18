@@ -23,3 +23,18 @@ Please run the command below:
 ```conda install matplotlib```    
 and run again:    
 ```python manage.py runserver```    
+
+
+If you see "module 'preprocessor' has no attribute 'set_options'" error   
+Go to url: https://pypi.org/project/tweet-preprocessor/#files   
+Download the tweet-proprocessor manually   
+Extract the files and execute the command below:      
+``` 
+cd tweet-preprocessor-0.5.0  
+pip install . 
+```
+Then go to project folder again and start the app: 
+```
+cd Spring2018-SWE573\swe573     
+python manage.py runserver   
+```
